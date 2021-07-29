@@ -1,0 +1,52 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="text-center">
+        <h1>Hello, {{ request.user }}!</h1>
+        <h5>This is your profile</h5>
+        {% if profile.profile_image %}
+            <img class="rounded-circle mb-3" src="{{ profile.profile_image.url }}" alt="Generic placeholder image"
+                 width="140"
+                 height="140">
+        {% else %}
+            <img class="rounded-circle mb-3" src="{% static 'profiles/profile.jpg' %}" alt="Generic placeholder image"
+                 width="140"
+                 height="140">
+        {% endif %}
+        <div class="w-50 m-auto">
+            <form action="{% url 'profile details' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }}
+                <button>Update</button>
+            </form>
+        </div>
+    </div>
+    <hr>
+    {% if places %}
+        <h2 class='text-center'>These are you places photos</h2>
+        <div class="row">
+            <div class="row">
+                {% for place in places %}
+                    <div class="col-lg-4">
+                        <div class="card" style="width: 18rem;">
+                            <img src="{{ place.image.url }}" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ place.name }} {{ place.location }}</h5>
+                                <p class="card-text">{{ place.description }}</p>
+                                <p class="card-text"><strong>Owner: {{ request.user }}</strong></p>
+                                <a href="{% url 'place details' place.id %}" class="btn btn-primary">See details</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="text-center">
+            <h2>You have no places</h2>
+            <a href="{% url 'create place' %}" class="btn btn-success">Add Place</a>
+        </div>
+    {% endif %}
+
+{% endblock %}

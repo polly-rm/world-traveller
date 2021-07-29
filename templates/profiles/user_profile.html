@@ -1,0 +1,72 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="page-content">
+        <section id="featured" class="content-section">
+            <div class="section-heading">
+
+                {% if profile.profile_image %}
+                    <img class="rounded-circle mb-3" src="{{ profile.profile_image.url }}"
+                         alt="Generic placeholder image"
+                         width="140"
+                         height="140">
+                {% else %}
+                    <img class="rounded-circle mb-3" src="{% static 'profiles/profile.jpg' %}"
+                         alt="Generic placeholder image"
+                         width="140"
+                         height="140">
+                {% endif %}
+
+                <h1>
+                    Hello, {{ request.user }}!<br><em>My profile</em>
+                    <br>
+                    {{ request.user.age }}
+                </h1>
+                <p>{{ request.user.about_me }}</p>
+
+                <div style="text-align: right;">
+                    <form action="{% url 'profile details' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <li>{{ form.first_name.label }}: {{ form.first_name }}</li>
+                        <li>{{ form.last_name.label }}: {{ form.last_name }}</li>
+                        <li>{{ form.age.label }}: {{ form.age }}</li>
+                        <li>{{ form.about_me.label }}: {{ form.about_me }}</li>
+                        <li>{{ form.profile_image.label }}: {{ form.profile_image }}</li>
+                        <button>Update</button>
+                    </form>
+                </div>
+            </div>
+
+            {#                {% if places %}#}
+            {#                    <p>View people's most enjoyable places around the world,#}
+            {#                        <br>share your favourite ones and inspire the others to travel.</p>#}
+            {#                {% else %}#}
+            {#                    <p>There are still no published destinations.#}
+            {#                        <br>Add your favourite place <a href="{% url 'create place' %}">HERE</a></p>#}
+            {#                {% endif %}#}
+
+            <div class="section-content">
+                <div class="owl-carousel owl-theme">
+                    {% for place in places %}
+                        <div class="item">
+                            <div class="image">
+                                <img src="{{ place.image.url }}" alt="" style="height: 430px">
+                                <div class="featured-button button">
+                                    <a href="{% url 'place details' place.id %}">View More Photos</a>
+                                </div>
+                            </div>
+                            <div class="text-content">
+                                <h4>{{ place.name }}</h4>
+                                <span>{{ place.location }}</span>
+                                <p>{{ place.description }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+{% endblock %}

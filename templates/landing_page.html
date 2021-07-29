@@ -1,0 +1,23 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <div class="slider">
+        <div class="Modern-Slider content-section" id="top">
+            <div class="item item-1">
+                <div class="img-fill">
+                    <div class="image"></div>
+                    <div class="info">
+                        <div>
+                            <h1>World Traveller</h1>
+                            <p>Discover different destinations and plan your next journey or<br>
+                                Share your best photographed moments from favourite places</p>
+                            <div class="white-button button">
+                                <a href="{% url 'list places' %}">Discover More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

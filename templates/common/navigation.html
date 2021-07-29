@@ -1,0 +1,61 @@
+<div class="sidebar-navigation hidde-sm hidden-xs">
+    <div class="logo">
+        <a href="{% url 'landing page' %}">World<em>traveller</em></a>
+    </div>
+    <div style="position: absolute; top: 45%; left: 15%">
+        <ul>
+            <li>
+                <a href="{% url 'landing page' %}" style="color: #f9f9f9">
+                    <span class="rect"></span>
+                    <span class="circle"></span>
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'list places' %}" style="color: #f9f9f9">
+                    <span class="rect"></span>
+                    <span class="circle"></span>
+                    All Places
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'create place' %}" style="color: #f9f9f9">
+                    <span class="rect"></span>
+                    <span class="circle"></span>
+                    Add New Place
+                </a>
+            </li>
+            {% if not request.user.is_authenticated %}
+                <li>
+                    <a href="{% url 'sign in' %}" style="color: #f9f9f9">
+                        <span class="rect"></span>
+                        <span class="circle"></span>
+                        Sign in
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'sign up' %}" style="color: #f9f9f9">
+                        <span class="rect"></span>
+                        <span class="circle"></span>
+                        Sign up
+                    </a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{% url 'profile details' %}" style="color: #f9f9f9">
+                        <span class="rect"></span>
+                        <span class="circle"></span>
+                        My profile
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'sign out' %}" style="color: #f9f9f9">
+                        <span class="rect"></span>
+                        <span class="circle"></span>
+                        Sign out
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
