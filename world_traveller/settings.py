@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'world_traveller.profiles',
     'world_traveller.common',
     'world_traveller.places',
+
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -146,3 +148,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = reverse_lazy('sign in')
 
 AUTH_USER_MODEL = 'world_traveller_auth.WorldTravellerUser'
+
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'mycloudforproject',
+    'API_KEY': '415166777623993',
+    'API_SECRET': 'H0KOwXvxPl3bsUKP0wGmD4IXSbM',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
