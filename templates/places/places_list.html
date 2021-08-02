@@ -14,9 +14,9 @@
                     <p>There are still no published destinations.
                         <br>Be the first one to add your favourite place <a href="{% url 'create place' %}">HERE</a></p>
                 {% endif %}
-
             </div>
             <p>{% profile_complete_notification %}</p>
+
             <div class="section-content">
                 <div class="owl-carousel owl-theme">
                     {% for place in places %}

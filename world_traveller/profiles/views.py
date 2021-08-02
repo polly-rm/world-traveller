@@ -1,3 +1,4 @@
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
@@ -23,4 +24,14 @@ def profile_details(request):
         'places': user_places,
         'profile': profile,
     }
-    return render(request, 'profiles/user_profile.html', context)
+    return render(request, 'profiles/profile_details.html', context)
+
+
+@login_required(login_url='/auth/sign_in/')
+def delete_profile(request):
+    profile = Profile.objects.get(pk=request.user.id)
+    if request.method == 'POST':
+        profile.user.delete()
+        return redirect('landing page')
+    else:
+        return render(request, 'profiles/profile_delete.html')

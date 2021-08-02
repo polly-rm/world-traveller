@@ -36,3 +36,17 @@ class Profile(models.Model):
         default=False,
     )
 
+    @property
+    def percentage_complete(self):
+        percent = {'first_name': 25, 'last_name': 25, 'age': 25, 'about_me': 25,}
+        total = 0
+        if self.first_name:
+            total += percent['first_name']
+        if self.last_name:
+            total += percent['last_name']
+        if self.age:
+            total += percent['age']
+        if self.about_me:
+            total += percent['about_me']
+
+        return f"Your profile is {total}% completed"
