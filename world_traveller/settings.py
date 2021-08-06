@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'world_traveller.places',
 
     'cloudinary',
+    'rest_framework_swagger',
 ]
 
 MIDDLEWARE = [
@@ -157,3 +158,7 @@ CLOUDINARY_STORAGE = {
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+LOGIN_REDIRECT_URL = 'landing page'
+
+REST_FRAMEWORK = {'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'}
