@@ -12,7 +12,7 @@ from django.views.generic.detail import SingleObjectMixin
 
 from world_traveller.common.forms import CommentForm
 from world_traveller.common.models import Like, Comment
-from world_traveller.core.views import PostOnlyView, BootStrapFormViewMixin
+from world_traveller.core.views import PostOnlyView
 from world_traveller.places.forms import PlaceForm, EditPlaceForm, CreatePlaceForm
 from world_traveller.places.models import Place
 
@@ -94,6 +94,9 @@ class CreatePlaceView(LoginRequiredMixin, CreateView):
         place.user = self.request.user
         place.save()
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        pass
 
 
 # @login_required(login_url='/auth/sign_in/')

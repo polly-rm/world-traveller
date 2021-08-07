@@ -8,7 +8,9 @@ UserModel = get_user_model()
 
 
 class Comment(models.Model):
-    text = models.TextField()
+    text = models.TextField(
+        max_length=200,
+    )
     place = models.ForeignKey(Place, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(
