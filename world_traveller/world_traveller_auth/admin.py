@@ -4,6 +4,10 @@ from django.contrib.auth.admin import UserAdmin
 
 UserModel = get_user_model()
 
+'''
+A UserModel is registered in the administration.
+'''
+
 
 @admin.register(UserModel)
 class WorldTravellerUserAdmin(UserAdmin):

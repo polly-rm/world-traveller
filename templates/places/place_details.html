@@ -12,7 +12,7 @@
                 <div class="owl-carousel owl-theme">
                     <div class="item">
                         <div class="image">
-                            <a href="{{ place.image.url }}" data-lightbox="image"><img src="{{ place.image.url }}"></a>
+                            <a href="{{ place.image.url }}" data-lightbox="image"><img src="{{ place.image.url }}" style="height:  450px"></a>
                             {#                            <img src="{{ place.image.url }}" alt="" style="height: 430px">#}
                         </div>
                         <div class="text-content">
@@ -30,12 +30,20 @@
                                         {% endif %}
                                     </a>
                                 {% endif %}
-                                <p class="mt-2">Likes: {{ place.likes_count }}</p>
+                                <p class="mt-2" style="font-size: larger">Likes: {{ place.likes_count }}</p>
                             </div>
                         </div>
                     </div>
+                    {% for p in place.images_set.all %}
+                        <div class="item">
+                            <div class="image">
+                                    <a href="{{ p.image.url }}" data-lightbox="image"><img src="{{ p.image.url }}" style="height: 450px"></a>
+                            </div>
+                        </div>
+                 {% endfor %}
                 </div>
             </div>
+
         </section>
 
         <h4 style="text-align: center">Comments</h4>

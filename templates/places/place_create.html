@@ -16,6 +16,7 @@
                                           enctype="multipart/form-data">
                                         {% csrf_token %}
                                         {{ form }}
+                                        {{ formset.as_table }}
                                         <br>
                                         <button class="btn" style="color: #45489a; width: 70px" type="submit">Add
                                         </button>

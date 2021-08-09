@@ -21,7 +21,9 @@
                                         <label style="color: #f9f9f9;">Password:</label>
                                         <li>{{ form.password }}</li>
                                         <br>
-                                        <div style="color: #f9f9f9">{{ form.errors }}</div>
+                                        {% if form.errors %}
+                                            <p>Email and/or password is incorrect!</p>
+                                        {% endif %}
                                         <button class="btn" style="color: #45489a; width: 70px" type="submit">Sign in
                                         </button>
                                     </form>

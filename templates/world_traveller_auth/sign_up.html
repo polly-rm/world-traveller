@@ -17,14 +17,16 @@
                                         <br>
                                         <label style="color: #f9f9f9;">Email:</label>
                                         <li>{{ form.email }}</li>
+                                        <div style="color: #f9f9f9">{{ form.email.errors }}</div>
                                         <br>
                                         <label style="color: #f9f9f9;">Password:</label>
                                         <li>{{ form.password1 }}</li>
+                                        <div style="color: #f9f9f9">{{ form.password1.errors }}</div>
                                         <br>
                                         <label style="color: #f9f9f9;">Password Confirmation:</label>
                                         <li>{{ form.password2 }}</li>
+                                        <div style="color: #f9f9f9">{{ form.password2.errors }}</div>
                                         <br>
-                                        <div style="color: #f9f9f9">{{ form.errors }}</div>
                                         <button class="btn" style="color: #45489a; width: 70px" type="submit">Sign up
                                         </button>
                                     </form>

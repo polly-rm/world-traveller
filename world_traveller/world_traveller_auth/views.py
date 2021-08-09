@@ -1,27 +1,16 @@
 from django.contrib.auth import logout, login
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import render, redirect
+from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView
 
 from world_traveller.world_traveller_auth.forms import SignInForm, SignUpForm
+from django.shortcuts import render, redirect
 
-
-# def sign_up(request):
-#     if request.method == 'POST':
-#         form = SignUpForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             login(request, user)
-#             return redirect('landing page')
-#     else:
-#         form = SignUpForm()
-#     context = {
-#         'form': form,
-#     }
-#     return render(request, 'world_traveller_auth/sign_up.html', context)
+'''
+Class-based SignUp, SignIn and SignOut
+are created to authenticate a user.
+'''
 
 
 class SignUpView(CreateView):
@@ -31,38 +20,16 @@ class SignUpView(CreateView):
 
     def form_valid(self, form):
         result = super().form_valid(form)
-
         login(self.request, self.object)
 
         return result
 
 
-# def sign_in(request):
-#     if request.method == 'POST':
-#         form = SignInForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             login(request, user)
-#             return redirect('landing page')
-#     else:
-#         form = SignInForm()
-#     context = {
-#         'form': form,
-#     }
-#     return render(request, 'world_traveller_auth/sign_in.html', context)
-
-
 class SignInView(LoginView):
     template_name = 'world_traveller_auth/sign_in.html'
-    form = SignInForm
+    form_class = SignInForm
+    success_url = reverse_lazy('landing page')
 
-
-# def sign_out(request):
-#     if request.method == 'POST':
-#         logout(request)
-#         return redirect('landing page')
-#     else:
-#         return render(request, 'world_traveller_auth/sign_out.html')
 
 class SignOutView(View):
     def get(self, request):

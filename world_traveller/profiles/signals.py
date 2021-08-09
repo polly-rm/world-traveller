@@ -6,6 +6,10 @@ from world_traveller.profiles.models import Profile
 
 UserModel = get_user_model()
 
+'''
+A signal that shows if a user created a specific place.
+'''
+
 
 @receiver(post_save, sender=UserModel)
 def user_created(sender, instance, created, **kwargs):
@@ -14,6 +18,13 @@ def user_created(sender, instance, created, **kwargs):
             user=instance,
         )
         profile.save()
+
+
+'''
+A signal that shows if a user's profile is totally
+completed. Once all profile fields are filled,
+the message for incomplete profile does not show anymore.
+'''
 
 
 @receiver(pre_save, sender=Profile)

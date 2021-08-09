@@ -1,13 +1,23 @@
-from django import forms
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.core.exceptions import ValidationError
 
 UserModel = get_user_model()
+
+'''
+SignUp and SignIn Forms are created.
+A user signs up with an email and a password.
+'''
+
+
+class SignUpForm(UserCreationForm):
+    class Meta:
+        model = UserModel
+        fields = ('email', 'password1', 'password2',)
 
 
 class SignInForm(AuthenticationForm):
     pass
+
 
 # class SignInForm(forms.Form):
 #     user = None
@@ -28,7 +38,4 @@ class SignInForm(AuthenticationForm):
 #         return self.user
 
 
-class SignUpForm(UserCreationForm):
-    class Meta:
-        model = UserModel
-        fields = ('email', 'password1', 'password2',)
+

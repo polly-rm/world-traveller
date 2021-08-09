@@ -1,6 +1,6 @@
 from django.urls import path
+from world_traveller.world_traveller_auth.views import SignInView, SignOutView, SignUpView
 
-from world_traveller.world_traveller_auth.views import SignUpView, SignInView, SignOutView
 
 urlpatterns = [
     path('sign_up/', SignUpView.as_view(), name='sign up'),

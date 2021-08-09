@@ -1,13 +1,12 @@
 from django.urls import reverse
 
-from tests.base.mixins import PlaceTestUtils, UserTestUtils
+from tests.base.utils import PlaceTestUtils, UserTestUtils
 from tests.base.tests import WorldTravellerTestCase
-from world_traveller.places.forms import CreatePlaceForm
 from world_traveller.places.models import Place
 
 
 class CreatePlaceViewTests(PlaceTestUtils, UserTestUtils, WorldTravellerTestCase):
-    def test_createPlace__whenIsAuthenticated_expectToCreatePlace(self):
+    def test_CreatePlace__whenIsAuthenticated_expectToSucceed(self):
         self.client.force_login(self.user)
         place = self.create_place(
             name='Test Place Name',
@@ -18,10 +17,26 @@ class CreatePlaceViewTests(PlaceTestUtils, UserTestUtils, WorldTravellerTestCase
         )
         self.assertListEqual(list(Place.objects.all()), [place])
 
-        response = self.client.get(reverse('create place'))
-        self.assertEqual(200, response.status_code)
+    def test_getCreatePlaceView__whenIsAuthenticated_expectToSucceed(self):
+        self.client.force_login(self.user)
 
-    def test_createPlace__whenNotAuthenticated_expectToRedirect(self):
         response = self.client.get(reverse('create place'))
-        self.assertEqual(302, response.status_code)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, template_name='places/place_create.html')
+
+    def test_getCreatePlace__whenIsNotAuthenticated_expectNotToGetCreatePlaceViewAndRedirect(self):
+        response = self.client.get(reverse('create place'))
+        self.assertEqual(response.status_code, 302)
+
+    def test_postCreatePlaceView__whenIsAuthenticated_expectToSucceed(self):
+        self.client.force_login(self.user)
+        response = self.client.post(reverse('create place'))
+
+        self.assertEqual(response.status_code, 200)
+
+
+
+
+
 

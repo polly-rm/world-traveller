@@ -31,80 +31,59 @@
                     </h1>
                 {% endif %}
 
-                <div style="position: absolute; right: 0; top: 0;">
-
+                <div>
                     <form action="{% url 'profile details' %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {{ form.first_name.label }}: {{ form.first_name }}
-                        {{ form.last_name.label }}: {{ form.last_name }}
-                        {{ form.age.label }}: {{ form.age }}
-                        {{ form.about_me.label }}: {{ form.about_me }}
+                        <div style="position: absolute; right: 0; top: 0;">
+                            {{ form.first_name.label }}: {{ form.first_name }}
+                            {{ form.last_name.label }}: {{ form.last_name }}
+                            {{ form.age.label }}: {{ form.age }}
+                            {{ form.about_me.label }}: {{ form.about_me }}
 
-                        <button class="btn"
-                                style="background-color: #45489a; color: #f9f9f9; width: 70px; position: absolute; right: 30%; top: 106%"
-                                type="submit">Update
-                        </button>
+
+                            <div style="position: absolute; top: 85%; left: -240%">
+                                {{ form.profile_image.label }}: {{ form.profile_image }}
+                            </div>
+
+                            <button class="btn"
+                                    style="background-color: #45489a; color: #f9f9f9; width: 70px; position: absolute; right: 30%; top: 106%"
+                                    type="submit">Update
+                            </button>
                     </form>
 
                     {{ profile.percentage_complete }}
                     <a href="{% url 'delete profile' %}" class="btn btn-danger"
                        style="position: absolute; right: 0; top: 106%">Delete</a>
                 </div>
-
-
-                {% if profile.profile_image %}
-                    <div style="position: absolute; left: 0; top: 137%;">
-                        <form action="{% url 'profile details' %}" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {{ form.profile_image.label }}: {{ form.profile_image }}
-                            <button class="btn"
-                                    style="background-color: #45489a; color: #f9f9f9; width: 70px; position: absolute; left: 102%; top: 58%"
-                                    type="submit">Update
-                            </button>
-                        </form>
-                    </div>
-                {% else %}
-                    <div style="position: absolute; left: 0; top: 156%;">
-                        <form action="{% url 'profile details' %}" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {{ form.profile_image.label }}: {{ form.profile_image }}
-                            <button class="btn"
-                                    style="background-color: #45489a; color: #f9f9f9; width: 70px; position: absolute; left: 102%; top: 38%"
-                                    type="submit">Update
-                            </button>
-                        </form>
-                    </div>
-                {% endif %}
-
             </div>
-        </section>
+    </section>
 
-        <section id="featured" class="content-section">
-            <div class="section-content">
-                <div class="owl-carousel owl-theme">
-                    {% if places %}
-                        {% for place in places %}
-                            <div class="item">
-                                <div class="image">
-                                    <img src="{{ place.image.url }}" alt="" style="height: 430px">
-                                    <div class="featured-button button">
-                                        <a href="{% url 'place details' place.id %}">View More Photos</a>
-                                    </div>
-                                </div>
-                                <div class="text-content">
-                                    <h4>{{ place.name }}</h4>
-                                    <span>{{ place.location }}</span>
-                                    <p>{{ place.description }}</p>
+    <section id="featured" class="content-section">
+        <div class="section-content">
+            <div class="owl-carousel owl-theme">
+                {% if places %}
+                    {% for place in places %}
+                        <div class="item">
+                            <div class="image">
+                                <img src="{{ place.image.url }}" alt="" style="height: 430px">
+                                <div class="featured-button button">
+                                    <a href="{% url 'place details' place.id %}">View More Photos</a>
                                 </div>
                             </div>
-                        {% endfor %}
-                    {% else %}
-                        <h5 style="text-align: right;">You have no places uploaded. Add new place <a
-                                href="{% url 'create place' %}">HERE!</a></h5>
-                    {% endif %}
-                </div>
+                            <div class="text-content">
+                                <h4>{{ place.name }}</h4>
+                                <span>{{ place.location }}</span>
+                                <p>{{ place.description }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <h5 style="text-align: right;">You have no places uploaded. Add new place <a
+                            href="{% url 'create place' %}">HERE!</a></h5>
+                {% endif %}
             </div>
-        </section>
+        </div>
+    </section>
 
     </div>
 

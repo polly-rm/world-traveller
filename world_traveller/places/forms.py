@@ -1,11 +1,10 @@
-import os
-from os.path import join
-
 from django import forms
-from django.conf import settings
+from world_traveller.core.mixins import BootstrapFormMixin
+from world_traveller.places.models import Place, Comment
 
-from world_traveller.core.forms import BootstrapFormMixin
-from world_traveller.places.models import Place
+'''
+PlaceForms are created.
+'''
 
 
 class PlaceForm(BootstrapFormMixin, forms.ModelForm):
@@ -19,12 +18,51 @@ class CreatePlaceForm(PlaceForm):
 
 
 class EditPlaceForm(PlaceForm):
-    def save(self, commit=True):
-        db_place = Place.objects.get(pk=self.instance.id)
-        if commit:
-            os.remove(join(settings.MEDIA_ROOT, str(db_place.image)))
-        return super().save()
-
     class Meta:
         model = Place
-        fields = '__all__'
+        exclude = ('user',)
+        widgets = {
+            'name': forms.TextInput(
+                # To disable Name Field when edit a place.
+                attrs={
+                    'readonly': 'readonly',
+                }
+            )
+        }
+
+
+'''
+CommentForm is created and TextField is modified 
+by widgets attrs to change its size when displayed.
+'''
+
+
+class CommentForm(forms.ModelForm):
+    place_pk = forms.IntegerField(
+        widget=forms.HiddenInput()
+    )
+
+    class Meta:
+        model = Comment
+        fields = ('text', 'place_pk')
+
+        widgets = {
+            'text': forms.Textarea(
+                attrs={
+                    'style': 'height: 60px; width: 1050px;',
+                }
+            )
+        }
+
+    def save(self, commit=True):
+        place_pk = self.cleaned_data['place_pk']
+        place = Place.objects.get(pk=place_pk)
+        comment = Comment(
+            text=self.cleaned_data['text'],
+            place=place,
+        )
+        if commit:
+            comment.save()
+        return comment
+
+

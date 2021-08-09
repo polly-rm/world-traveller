@@ -1,8 +1,13 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-
 UserModel = get_user_model()
+
+'''
+ProfileModel is created with built-in validators.
+A property that show how much percentage a user's
+profile is completed.
+'''
 
 
 class Profile(models.Model):

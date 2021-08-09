@@ -5,8 +5,8 @@ UserModel = get_user_model()
 
 
 class WorldTravellerTestCase(TestCase):
-    logged_in_user_email = 'poliTest@abv.bg'
-    logged_in_user_password = '1234'
+    logged_in_user_email = 'email_test'
+    logged_in_user_password = 'password_test'
 
     def assertListEmpty(self, ll):
         return self.assertListEqual([], ll, 'The list is not empty')

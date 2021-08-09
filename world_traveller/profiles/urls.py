@@ -1,6 +1,6 @@
 from django.urls import path
 
-from world_traveller.profiles.views import profile_details, delete_profile
+from world_traveller.profiles.views import delete_profile, profile_details
 
 urlpatterns = [
     path('', profile_details, name='profile details'),
