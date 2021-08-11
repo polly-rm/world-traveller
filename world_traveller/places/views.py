@@ -20,6 +20,7 @@ class PlacesListView(ListView):
     model = Place
     template_name = 'places/places_list.html'
     context_object_name = 'places'
+    ordering = ['-created_on']
 
 
 '''

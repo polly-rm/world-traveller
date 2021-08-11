@@ -23,7 +23,7 @@ def profile_details(request):
     else:
         form = ProfileForm(instance=profile)
 
-    user_places = Place.objects.filter(id=request.user.id)
+    user_places = Place.objects.filter(user=request.user).order_by('-created_on')
     context = {
         'form': form,
         'places': user_places,

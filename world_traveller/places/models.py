@@ -30,6 +30,7 @@ class Place(models.Model):
     image = models.ImageField(
         upload_to='places',
     )
+    created_on = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(
         UserModel,
         on_delete=models.CASCADE,

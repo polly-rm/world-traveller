@@ -63,9 +63,9 @@
             <div class="owl-carousel owl-theme">
                 {% if places %}
                     {% for place in places %}
-                        <div class="item">
-                            <div class="image">
-                                <img src="{{ place.image.url }}" alt="" style="height: 430px">
+                        <div class="item" style="background-color: #dbdbdb;">
+                            <div class="image" style="width: auto; height: 450px;">
+                                <img src="{{ place.image.url }}" alt="" style="width: 100%; height: 100%; object-fit: contain">
                                 <div class="featured-button button">
                                     <a href="{% url 'place details' place.id %}">View More Photos</a>
                                 </div>
