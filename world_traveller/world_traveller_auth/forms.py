@@ -3,13 +3,12 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 UserModel = get_user_model()
 
-'''
-SignUp and SignIn Forms are created.
-A user signs up with an email and a password.
-'''
-
 
 class SignUpForm(UserCreationForm):
+    """
+    SignUp and SignIn Forms are created.
+    A user signs up with an email and a password.
+    """
     class Meta:
         model = UserModel
         fields = ('email', 'password1', 'password2',)

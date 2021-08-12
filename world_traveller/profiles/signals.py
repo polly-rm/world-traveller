@@ -6,13 +6,10 @@ from world_traveller.profiles.models import Profile
 
 UserModel = get_user_model()
 
-'''
-A signal that shows if a user created a specific place.
-'''
-
 
 @receiver(post_save, sender=UserModel)
 def user_created(sender, instance, created, **kwargs):
+    """A signal that shows if a user created a specific place."""
     if created:
         profile = Profile(
             user=instance,
@@ -20,14 +17,12 @@ def user_created(sender, instance, created, **kwargs):
         profile.save()
 
 
-'''
-A signal that shows if a user's profile is totally
-completed. Once all profile fields are filled,
-the message for incomplete profile does not show anymore.
-'''
-
-
 @receiver(pre_save, sender=Profile)
 def check_is_complete(sender, instance, **kwargs):
+    """
+    A signal that shows if a user's profile is totally
+    completed. Once all profile fields are filled,
+    the message for incomplete profile does not show anymore.
+    """
     if instance.first_name and instance.last_name and instance.age and instance.about_me:
         instance.is_complete = True

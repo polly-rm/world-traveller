@@ -2,10 +2,6 @@ from django import forms
 from world_traveller.core.mixins import BootstrapFormMixin
 from world_traveller.places.models import Place, Comment
 
-'''
-PlaceForms are created.
-'''
-
 
 class PlaceForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
@@ -31,13 +27,11 @@ class EditPlaceForm(PlaceForm):
         }
 
 
-'''
-CommentForm is created and TextField is modified 
-by widgets attrs to change its size when displayed.
-'''
-
-
 class CommentForm(forms.ModelForm):
+    """
+    CommentForm is created and TextField is modified
+    by widgets attrs to change its size when displayed.
+    """
     place_pk = forms.IntegerField(
         widget=forms.HiddenInput()
     )

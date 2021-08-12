@@ -7,13 +7,12 @@ from django.views.generic import CreateView
 from world_traveller.world_traveller_auth.forms import SignInForm, SignUpForm
 from django.shortcuts import render, redirect
 
-'''
-Class-based SignUp, SignIn and SignOut
-are created to authenticate a user.
-'''
-
 
 class SignUpView(CreateView):
+    """
+    Class-based SignUp, SignIn and SignOut
+    are created to authenticate a user.
+    """
     form_class = SignUpForm
     template_name = 'world_traveller_auth/sign_up.html'
     success_url = reverse_lazy('landing page')
@@ -26,12 +25,20 @@ class SignUpView(CreateView):
 
 
 class SignInView(LoginView):
+    """
+    Class-based SignUp, SignIn and SignOut
+    are created to authenticate a user.
+    """
     template_name = 'world_traveller_auth/sign_in.html'
     form_class = SignInForm
     success_url = reverse_lazy('landing page')
 
 
 class SignOutView(View):
+    """
+    Class-based SignUp, SignIn and SignOut
+    are created to authenticate a user.
+    """
     def get(self, request):
         return render(request, 'world_traveller_auth/sign_out.html')
 

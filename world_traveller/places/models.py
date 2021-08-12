@@ -6,14 +6,13 @@ from world_traveller.core.validators import validate_text_starts_with_capital
 
 UserModel = get_user_model()
 
-'''
-PlaceModel is created with custom and built-in
-fields validators. Foreign-key connection is 
-created with the user that add the place.
-'''
-
 
 class Place(models.Model):
+    """
+    PlaceModel is created with custom and built-in
+    fields validators. Foreign-key connection is
+    created with the user that add the place.
+    """
     name = models.CharField(
         max_length=50,
         validators=[validate_text_starts_with_capital],
@@ -37,14 +36,12 @@ class Place(models.Model):
     )
 
 
-'''
-CommentModel is created with foreign-key connection
-to the place that it refers to. This is how users
-can comment each place and comments can be displayed.
-'''
-
-
 class Comment(models.Model):
+    """
+    CommentModel is created with foreign-key connection
+    to the place that it refers to. This is how users
+    can comment each place and comments can be displayed.
+    """
     text = models.TextField(
         max_length=200,
     )
@@ -56,14 +53,12 @@ class Comment(models.Model):
     )
 
 
-'''
-LikeModel is created with foreign-key connection
-to the place that it refers to. This is how users
-can like each place and likes number can be displayed.
-'''
-
-
 class Like(models.Model):
+    """
+    LikeModel is created with foreign-key connection
+    to the place that it refers to. This is how users
+    can like each place and likes number can be displayed.
+    """
     place = models.ForeignKey(Place, on_delete=models.CASCADE)
     user = models.ForeignKey(
         UserModel,
@@ -71,14 +66,12 @@ class Like(models.Model):
     )
 
 
-'''
-ImagesModel is created with foreign-key connection
-to the place that it refers to. This is how a user
-can add multiple images for one place.
-'''
-
-
 class Images(models.Model):
+    """
+    ImagesModel is created with foreign-key connection
+    to the place that it refers to. This is how a user
+    can add multiple images for one place.
+    """
     place = models.ForeignKey(Place, on_delete=CASCADE)
     image = models.ImageField(
         upload_to='places',
@@ -86,8 +79,6 @@ class Images(models.Model):
         blank=True,
         null=True,
     )
-
-
 
 
 

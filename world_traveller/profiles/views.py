@@ -4,15 +4,15 @@ from world_traveller.places.models import Place
 from world_traveller.profiles.forms import ProfileForm
 from world_traveller.profiles.models import Profile
 
-'''
-Function-based view that shows profile details.
-It also displays all places that were created
-by the specific user.
-'''
-
 
 @login_required(login_url='/auth/sign_in/')
 def profile_details(request):
+    """
+    Function-based view that shows profile details.
+    It also displays all places that were created
+    by the specific user.
+    """
+
     profile = Profile.objects.get(pk=request.user.id)
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=profile)
@@ -32,15 +32,13 @@ def profile_details(request):
     return render(request, 'profiles/profile_details.html', context)
 
 
-'''
-Function-based view to delete profile. Once a
-profile is deleted, all user's data and places
-are also deleted.
-'''
-
-
 @login_required(login_url='/auth/sign_in/')
 def delete_profile(request):
+    """
+    Function-based view to delete profile. Once a
+    profile is deleted, all user's data and places
+    are also deleted.
+    """
     profile = Profile.objects.get(pk=request.user.id)
     if request.method == 'POST':
         profile.user.delete()

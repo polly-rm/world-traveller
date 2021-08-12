@@ -1,8 +1,18 @@
-'''
-BootStrapFormMixin is created so it can be
-inherited by their forms and their widgets
-attr get the same bootstrap class 'form-control'.
-'''
+class BootstrapFormMixin:
+    """
+    BootStrapFormMixin is created so it can be
+    inherited by their forms and their widgets
+    attr get the same bootstrap class 'form-control'.
+    """
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._init_bootstrap_fields()
+
+    def _init_bootstrap_fields(self):
+        for (_, field) in self.fields.items():
+            if 'class' not in field.widget.attrs:
+                field.widget.attrs['class'] = ''
+            field.widget.attrs['class'] += 'form-control'
 
 
 class BootStrapFormViewMixin:
@@ -22,13 +32,4 @@ class BootStrapFormViewMixin:
             field.widget.attrs['class'] += 'form-control'
 
 
-class BootstrapFormMixin:
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self._init_bootstrap_fields()
 
-    def _init_bootstrap_fields(self):
-        for (_, field) in self.fields.items():
-            if 'class' not in field.widget.attrs:
-                field.widget.attrs['class'] = ''
-            field.widget.attrs['class'] += 'form-control'

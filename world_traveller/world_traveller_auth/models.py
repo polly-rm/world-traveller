@@ -4,13 +4,12 @@ from django.db import models
 
 from world_traveller.world_traveller_auth.managers import WorldTravellerUserManager
 
-'''
-Custom UserModel is created and extended.
-A user uses an email to authenticate.
-'''
-
 
 class WorldTravellerUser(AbstractBaseUser, PermissionsMixin):
+    """
+    Custom UserModel is created and extended.
+    A user uses an email to authenticate.
+    """
     email = models.EmailField(
         unique=True,
     )

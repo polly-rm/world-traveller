@@ -11,28 +11,24 @@ from world_traveller.places.models import Place, Images, Like, Comment
 
 UserModel = get_user_model()
 
-'''
-Class-based view that show places list is created.
-'''
-
 
 class PlacesListView(ListView):
+    """Class-based view that show places list is created."""
     model = Place
     template_name = 'places/places_list.html'
     context_object_name = 'places'
     ordering = ['-created_on']
 
 
-'''
-Function-based view to add new place is created.
-ImageFormset is used to upload multiple images
-with only one ImageField when create a new place.
-Only logged in users can create a place.
-'''
-
-
 @login_required(login_url='/auth/sign_in/')
 def create_place(request):
+    """
+    Function-based view to add new place is created.
+    ImageFormset is used to upload multiple images
+    with only one ImageField when create a new place.
+    Only logged in users can create a place.
+    """
+
     ImageFormset = modelformset_factory(Images, fields=('image',), extra=3)
     if request.method == 'POST':
         form = CreatePlaceForm(request.POST, request.FILES)
@@ -65,15 +61,13 @@ def create_place(request):
     return render(request, 'places/place_create.html', context)
 
 
-'''
-Class-based view to edit an existing place. 
-It can be edited only by the user that created it
-and only when the user is signed in.
-Only logged in users can edit a place.
-'''
-
-
 class EditPlaceView(LoginRequiredMixin, UpdateView):
+    """
+    Class-based view to edit an existing place.
+    It can be edited only by the user that created it
+    and only when the user is signed in.
+    Only logged in users can edit a place.
+    """
     model = Place
     context_object_name = 'place'
     template_name = 'places/place_edit.html'
@@ -81,29 +75,25 @@ class EditPlaceView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('profile details')
 
 
-'''
-Class-based view to delete an existing place.
-It can be deleted only by the user that created it
-and only when the user is signed in.
-Only logged in users can delete a place. 
-'''
-
-
 class DeletePlaceView(LoginRequiredMixin, DeleteView):
+    """
+    Class-based view to delete an existing place.
+    It can be deleted only by the user that created it
+    and only when the user is signed in.
+    Only logged in users can delete a place.
+    """
     template_name = 'places/place_delete.html'
     model = Place
     success_url = reverse_lazy('profile details')
 
 
-'''
-Class-based view to show place details. It displays
-place images, comments and likes for everyone and
-Edit/Delete button only for the user that created it.
-All users can see places' details.
-'''
-
-
 class PlaceDetailsView(DetailView):
+    """
+    Class-based view to show place details. It displays
+    place images, comments and likes for everyone and
+    Edit/Delete button only for the user that created it.
+    All users can see places' details.
+    """
     model = Place
     template_name = 'places/place_details.html'
     context_object_name = 'place'
@@ -129,15 +119,13 @@ class PlaceDetailsView(DetailView):
         return context
 
 
-'''
-Class-based view to show places' comments. It displays
-comments, the users that created them and they are
-being displayed by the time of the last added one.
-Only logged in users can comment a place.
-'''
-
-
 class CommentPlaceView(LoginRequiredMixin, PostOnlyView):
+    """
+    Class-based view to show places' comments. It displays
+    comments, the users that created them and they are
+    being displayed by the time of the last added one.
+    Only logged in users can comment a place.
+    """
     form_class = CommentForm
 
     def form_valid(self, form):
@@ -155,15 +143,13 @@ class CommentPlaceView(LoginRequiredMixin, PostOnlyView):
         pass
 
 
-'''
-Function-based view to show places' likes. It displays
-the number of likes. A place cannot be liked by the user
-that created it. Only logged in users can like a place.
-'''
-
-
 @login_required(login_url='/auth/sign_in/')
 def like_place(request, pk):
+    """
+    Function-based view to show places' likes. It displays
+    the number of likes. A place cannot be liked by the user
+    that created it. Only logged in users can like a place.
+    """
     place = Place.objects.get(pk=pk)
     like_object_by_user = place.like_set.filter(user_id=request.user.id)
 
@@ -198,7 +184,6 @@ def like_place(request, pk):
 #     def get_context_data(self, **kwargs):
 #         context = super(CreatePlaceView, self).get_context_data(**kwargs)
 #         return context
-
 
 
 

@@ -1,12 +1,9 @@
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.hashers import make_password
 
-'''
-WorldTravellerUserManager is created to extend the UserModel.
-'''
-
 
 class WorldTravellerUserManager(BaseUserManager):
+    """WorldTravellerUserManager is created to extend the UserModel."""
     def _create_user(self, email, password, **extra_fields):
         if not email:
             raise ValueError('The given email must be set')
